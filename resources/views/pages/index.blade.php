@@ -14,15 +14,19 @@
                             <div class="search__switch_item">Сканирование QR-кода</div>
                         </div>
                         <form class="page-index__form flex flex-col gap-y-6" action="">
-                            <x-field label="ФН" placeholder="1948502912138934205" />
-                            <x-field label="ФД" placeholder="1948502912138934205" />
-                            <x-field label="ФПД" placeholder="1948502912138934205" />
-                            <div class="grid grid-cols-2 gap-x-2.5 items-end">
-                                <x-field type="date" placeholder="1948502912138934205" />
-                                <x-field type="time" placeholder="1948502912138934205" />
-                            </div>
-                            <x-field label="Сумма" placeholder="000 000 000 ₽" />
-                            <div class="">
+                            <x-field label="ФН" name="fiscalDriveNumber" placeholder="1948502912138934205" />
+                            <x-field label="ФД" name="fiscalDocumentNumber" placeholder="1948502912138934205" />
+                            <x-field label="ФПД" name="fiscalSign" placeholder="1948502912138934205" />
+                            <x-field label="Дата" type="datetime-local" name="dateTime"
+                                placeholder="1948502912138934205" />
+
+                            {{-- <div class="grid grid-cols-2 gap-x-2.5 items-end">
+                            <x-field type="date" placeholder="1948502912138934205" />
+                            <x-field type="time" placeholder="1948502912138934205" />
+                                </div> --}}
+                            <x-field label="Сумма" name="1" placeholder="000 000 000 ₽" />
+                            <div class="flex">
+                                <x-select label="Тип" name="operationType" :options="$options_operation_type" />
                                 <button>Найти</button>
                             </div>
                         </form>

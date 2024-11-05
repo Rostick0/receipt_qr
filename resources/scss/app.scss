@@ -3,3 +3,15 @@
 @import "tailwindcss/utilities";
 
 @import "./reset";
+
+.input {
+    &::placeholder {
+        color: rgb(199, 199, 199);
+    }
+}
+
+.select {
+    // &__placeholder {
+    //     color: rgb(199, 199, 199);
+    // }
+}

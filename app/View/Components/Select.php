@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Field extends Component
+class Select extends Component
 {
     /**
      * Create a new component instance.
@@ -14,17 +14,15 @@ class Field extends Component
     public function __construct(
         public ?string $label = null,
         public string $name,
-        public ?string $type = 'text',
-        public ?string $placeholder = ''
-    ) {
-        // $this->type = $type;
-    }
+        public ?string $placeholder,
+        public array $options
+    ) {}
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.field');
+        return view('components.select');
     }
 }
