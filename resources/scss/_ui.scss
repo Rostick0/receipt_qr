@@ -1,3 +1,8 @@
+.btn {
+    // background-color: rgb(0, 0, 0);
+    @apply bg-black text-white rounded-lg font-medium p-1.5;
+}
+
 .input {
     &::placeholder {
         color: rgb(199, 199, 199);

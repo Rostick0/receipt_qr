@@ -9,3 +9,16 @@
 .receipt {
     background: rgba(248, 248, 248, 1);
 }
+
+.search {
+    &__switch {
+        &_item {
+            opacity: 0.5;
+
+            &.active {
+                text-decoration: underline  ;
+                opacity: 1;
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 <div class="wrapper">
     @include('layout.header')
-    <main class="main">
+    <main class="main pt-6 pb-12">
         @yield('html')
     </main>
 </div>

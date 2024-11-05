@@ -77,15 +77,16 @@
                         </div>
                     </div>
                     <div class="receipt__image flex max-w-52 mx-auto">
-                        <img class="receipt__img" src="/images/qr_code.png" alt="">
+                        <img class="receipt__img" src="/images/qr_code.png" alt="Проверка чека" decoding="async"
+                            loading="lazy">
                     </div>
                 </div>
 
                 <div class="page-index__container_right w-full">
-                    <div class="page-index__search search p-4 mb-24">
-                        <div class="search__title text-4xl mb-3 font-extrabold ">Поиск чека</div>
+                    <div class="page-index__search search p-6 mb-24">
+                        <div class="search__title text-4xl mb-3 text-center font-extrabold">Поиск чека</div>
                         <div class="search__switch flex gap-x-7 mb-6">
-                            <div class="search__switch_item">Ручной ввод</div>
+                            <div class="search__switch_item active">Ручной ввод</div>
                             <div class="search__switch_item">Сканирование QR-кода</div>
                         </div>
                         <form class="page-index__form flex flex-col gap-y-6" action="">
@@ -100,9 +101,9 @@
                             <x-field type="time" placeholder="1948502912138934205" />
                                 </div> --}}
                             <x-field label="Сумма" name="1" placeholder="000 000 000 ₽" />
-                            <div class="flex">
+                            <div class="flex gap-x-6">
                                 <x-select label="Тип" name="operationType" :options="$options_operation_type" />
-                                <button>Найти</button>
+                                <button class="btn grow">Найти</button>
                             </div>
                         </form>
                     </div>
