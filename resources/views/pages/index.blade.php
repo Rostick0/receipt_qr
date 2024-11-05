@@ -147,5 +147,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal">
+            <div class="modal__inner">
+                <div class="" id="my-qr-reader"></div>
+            </div>
+        </div>
     </div>
 @endsection

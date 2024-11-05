@@ -10,13 +10,27 @@
     background: rgba(248, 248, 248, 1);
 }
 
+.modal {
+    @apply p-12;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &__inner {
+        @apply bg-white;
+    }
+}
+
 .search {
     &__switch {
         &_item {
             opacity: 0.5;
 
             &.active {
-                text-decoration: underline  ;
+                text-decoration: underline;
                 opacity: 1;
             }
         }
