@@ -3,11 +3,86 @@
 @section('html')
     <div class="page-index">
         <div class="container mx-auto">
-            <div class="page-index__container flex">
-                <div class=""></div>
+            <div class="page-index__container flex items-start gap-12">
+                <div class="receipt grow text-xl py-6 px-12">
+                    <div class="">
+                        <div class="text-center mb-1">КАССОВЫЙ ЧЕК</div>
+                        <div class="text-center mb-1">ООО Конфеты</div>
+                        <div class="text-center">ИНН 45403304343258</div>
+                    </div>
+                    <div class="my-6">
+                        <div class="mb-2.5">Г. Москва, ул. Центральная, дом 63</div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>ЧЕК</span>
+                            <span>25</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>13.08.2024</span>
+                            <span>12:20</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>Смена</span>
+                            <span>4</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>Приход</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>СНО</span>
+                            <span>УСН</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>Кассир</span>
+                            <span>Иванов И.И.</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>СРН ККТНО</span>
+                            <span>0012305430213444</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>Карандаш</span>
+                            <span>1 шт * 23.00 ₽ =</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>Тетрадь 24л.</span>
+                            <span>1 шт * 57.00 ₽ =</span>
+                        </div>
+                        <div class="flex items-center justify-between font-bold mb-2.5">
+                            <span>ИТОГ</span>
+                            <span>= 80.00 ₽</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>НАЛИЧНЫМИ</span>
+                            <span>= 80.00 ₽ </span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>ПОЛУЧЕНО</span>
+                            <span>= 80.00 ₽</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>СУММА БЕЗ НДС</span>
+                            <span>= 80.00 ₽ </span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>ФН</span>
+                            <span>94250729345</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2.5">
+                            <span>ФД</span>
+                            <span>235</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>ФПД</span>
+                            <span>12342136589</span>
+                        </div>
+                    </div>
+                    <div class="receipt__image flex max-w-52 mx-auto">
+                        <img class="receipt__img" src="/images/qr_code.png" alt="">
+                    </div>
+                </div>
 
-                <div class="">
-                    <div class="page-index__search mb-24 search">
+                <div class="page-index__container_right w-full">
+                    <div class="page-index__search search p-4 mb-24">
                         <div class="search__title text-4xl mb-3 font-extrabold ">Поиск чека</div>
                         <div class="search__switch flex gap-x-7 mb-6">
                             <div class="search__switch_item">Ручной ввод</div>
