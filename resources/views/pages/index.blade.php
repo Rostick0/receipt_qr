@@ -1,0 +1,71 @@
+@extends('layout.index')
+
+@section('html')
+    <div class="page-index">
+        <div class="container mx-auto">
+            <div class="page-index__container flex">
+                <div class=""></div>
+
+                <div class="">
+                    <div class="page-index__search mb-24 search">
+                        <div class="search__title text-4xl mb-3 font-extrabold ">Поиск чека</div>
+                        <div class="search__switch flex gap-x-7 mb-6">
+                            <div class="search__switch_item">Ручной ввод</div>
+                            <div class="search__switch_item">Сканирование QR-кода</div>
+                        </div>
+                        <form class="page-index__form flex flex-col gap-y-6" action="">
+                            <x-field label="ФН" placeholder="1948502912138934205" />
+                            <x-field label="ФД" placeholder="1948502912138934205" />
+                            <x-field label="ФПД" placeholder="1948502912138934205" />
+                            <div class="grid grid-cols-2 gap-x-2.5 items-end">
+                                <x-field type="date" placeholder="1948502912138934205" />
+                                <x-field type="time" placeholder="1948502912138934205" />
+                            </div>
+                            <x-field label="Сумма" placeholder="000 000 000 ₽" />
+                            <div class="">
+                                <button>Найти</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="page-index__rules">
+                        <h2 class="font-bold border-b border-black mb-4 pb-4">Обязательные реквизиты на бумажном кассовом
+                            чеке
+                            согласно
+                            требованиям
+                            №54-ФЗ:
+                        </h2>
+                        <p class="mb-4">С 1 июля 2021 года все компании и индивидуальные предприниматели, принимающие
+                            платежи,
+                            обязаны
+                            использовать
+                            онлайн-кассы. В связи с этим, каждый кассовый чек должен содержать определенные обязательные
+                            реквизиты для
+                            подтверждения подлинности транзакции, включая QR-код, который содержит закодированные данные для
+                            проверки.
+                        </p>
+                        <figure>
+                            <figcaption class="mb-4">Основные реквизиты кассового чека:</figcaption>
+                            <ol>
+                                <li>Тип документа (кассовый чек).</li>
+                                <li>Название организации или индивидуального предпринимателя.</li>
+                                <li>Номер чека в рамках текущей смены.</li>
+                                <li>Дата и время проведения расчета, а также адрес точки продаж.</li>
+                                <li>Система налогообложения, применяемая продавцом.</li>
+                                <li>Признак расчета (например, продажа или возврат).</li>
+                                <li>Перечень наименований товаров, работ или услуг и их количество.</li>
+                                <li>Стоимость единицы товара/услуги.</li>
+                                <li>Итоговая сумма чека, информация о НДС и налоговой ставке.</li>
+                                <li>Способ оплаты (наличные или безналичные).</li>
+                                <li>Регистрационный номер контрольно-кассовой техники (ККТ).</li>
+                                <li>Уникальный номер фискального накопителя.</li>
+                                <li>Фискальный признак документа (ФП или ФПД).</li>
+                                <li>Номер фискального документа (ФД).</li>
+                                <li>QR-код для проверки чека</li>
+                            </ol>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
