@@ -4,4 +4,14 @@
             max-width: 438px;
         }
     }
+
+    @media (max-width: 1024px) {
+        &__container {
+            flex-direction: column-reverse;
+
+            &_right {
+                max-width: 100%;
+            }
+        }
+    }
 }

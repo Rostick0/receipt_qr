@@ -87,7 +87,7 @@
                         <div class="search__title text-4xl mb-3 text-center font-extrabold">Поиск чека</div>
                         <div class="search__switch flex gap-x-7 mb-6">
                             <div class="search__switch_item active">Ручной ввод</div>
-                            <div class="search__switch_item">Сканирование QR-кода</div>
+                            <div class="search__switch_item" id="qr-scan">Сканирование QR-кода</div>
                         </div>
                         <form class="page-index__form flex flex-col gap-y-6" action="">
                             <x-field label="ФН" name="fiscalDriveNumber" placeholder="1948502912138934205" />
@@ -148,9 +148,11 @@
             </div>
         </div>
 
-        <div class="modal">
-            <div class="modal__inner">
-                <div class="" id="my-qr-reader"></div>
+        <div class="modal" id="modal-scan">
+            <div class="modal__inner p-4 mx-auto max-w-4xl">
+                <div class="" id="qr-reader"></div>
+                <input type="file" id="qr-input-file" accept="image/*" hidden>
+                <button class="btn mt-2" id="qr-btn">Загрузить файл</button>
             </div>
         </div>
     </div>

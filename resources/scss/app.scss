@@ -8,19 +8,38 @@
 
 .receipt {
     background: rgba(248, 248, 248, 1);
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
 }
 
 .modal {
     @apply p-12;
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
+    display: none;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 
+    &.active {
+        display: block;
+    }
+
     &__inner {
         @apply bg-white;
+    }
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
+}
+
+#qr-reader {
+    video {
+        min-width: 100%;
     }
 }
 
