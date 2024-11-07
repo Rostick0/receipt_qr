@@ -20,6 +20,7 @@ services:
         volumes:
             - '.:/var/www/html'
             - '/etc/letsencrypt/:/etc/letsencrypt/'
+            - '/etc/letsencrypt/live/proverka-cheka.ru/:/etc/letsencrypt/live/proverka-cheka.ru/'
         networks:
             - sail
         depends_on:
