@@ -1,10 +1,10 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@forward "tailwindcss/base";
+@forward "tailwindcss/components";
+@forward "tailwindcss/utilities";
 
-@import "./reset";
-@import "./ui";
-@import "./pages/";
+@forward "./reset";
+@forward "./ui";
+@forward "./pages/";
 
 .receipt {
     background: rgba(248, 248, 248, 1);
