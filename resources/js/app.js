@@ -83,8 +83,15 @@ import "./bootstrap";
         if (e.target !== modalScan) return;
 
         if (modalScan.classList.contains("active")) {
-            htmlscanner.stop();
             modalScan.classList.remove("active");
+        }
+
+        if (htmlscanner.isScanning) {
+            htmlscanner.stop();
+        }
+
+        if (!fileinput.hasAttribute("hidden")) {
+            fileinput.setAttribute("hidden", true);
         }
     };
 
