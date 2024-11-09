@@ -46,9 +46,11 @@
 .search {
     &__switch {
         &_item {
+            cursor: pointer;
             opacity: 0.5;
 
             &.active {
+                cursor: default;
                 text-decoration: underline;
                 opacity: 1;
             }
