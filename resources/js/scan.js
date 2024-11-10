@@ -61,6 +61,10 @@ export const initScan = async () => {
             )
         );
         closeModal();
+
+        receipt.scrollIntoView({
+            behavior: "smooth",
+        });
     }, 250);
 
     const startCamera = async () => {
