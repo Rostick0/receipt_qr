@@ -1,4 +1,29 @@
 import moment from "moment";
+import QRCode from "qrcode";
+
+export const qrCode = (el, text, options = {}, onError = () => {}) =>
+    // QRCode.toDataURL(el, data, onError);
+    QRCode.toCanvas(el, text, options, onError);
+
+export const receiptQrCode = (qrCodeData) =>
+    qrCode(
+        document.getElementById("receipt-qrcode"),
+        qrCodeData,
+        {
+            margin: 0,
+            color: {
+                dark: "#000000",
+                light: "#f8f8f8",
+            },
+            // scale: 20,
+            width: 208,
+            height: 208,
+        },
+        function (error) {
+            if (error) console.error(error);
+            console.log("success!");
+        }
+    );
 
 export const receiptComponent = (
     receipt
@@ -142,7 +167,6 @@ export const receiptComponent = (
                         </div>
                     </div>
                     <div class="receipt__image flex max-w-52 mx-auto">
-                        <img class="receipt__img" src="/images/qr_code.png" alt="Проверка чека" decoding="async"
-                            loading="lazy">
+                        <canvas class="receipt__img" id="receipt-qrcode" width="100%" height="100%">
                     </div>
                 </div>`;

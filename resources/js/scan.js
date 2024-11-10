@@ -1,7 +1,8 @@
 import axios from "axios";
 import { API_URL } from "./consts";
 import moment from "moment";
-import { receiptComponent } from "./components";
+import { receiptComponent, receiptQrCode } from "./components";
+import debounce from "lodash/debounce";
 
 export const getParamsFromQuery = (queryString) =>
     Object.fromEntries(new URLSearchParams(queryString).entries());
@@ -13,6 +14,54 @@ export const initScan = async () => {
     const qrScan = document.querySelector("#qr-scan");
     const modalScan = document.querySelector("#modal-scan");
     const receipt = document.querySelector("#receipt");
+
+    const replaceDecodedParams = (stringParams) =>
+        stringParams
+            ?.replace("t=", "filterEQ[dateTime]=")
+            ?.replace("s=", "filterEQ[totalSum]=")
+            ?.replace("fn=", "filterEQ[fiscalDriveNumber]=")
+            ?.replace("i=", "filterEQ[fiscalDocumentNumber]=")
+            ?.replace("fp=", "filterEQ[fiscalSign]=")
+            ?.replace("n=", "filterEQ[operationType]=");
+
+    const scanSuccess = debounce(async (decode) => {
+        const decodedData = getParamsFromQuery(
+            replaceDecodedParams(decode?.decodedText)
+        );
+
+        const res = await axios.get(`${API_URL}/receipt`, {
+            params: {
+                extends:
+                    "products,operationTypeCollection,taxationTypeCollection",
+                limit: 1,
+                ...decodedData,
+                "filterEQ[dateTime]": moment(
+                    decodedData["filterEQ[dateTime]"]
+                ).toISOString(),
+            },
+        });
+
+        // finded receipt
+        const data = res.data?.data?.data?.[0];
+
+        if (!data) {
+            alert("Код не найден");
+            // closeModal();
+            return;
+        }
+
+        receipt.innerHTML = receiptComponent(data);
+        console.log(
+            receiptQrCode(
+                `dateTime=${moment(data?.dateTime).format("YYYYMMDDTHHmm")}&s=${
+                    data?.totalSum / 100
+                }&fn=${data?.fiscalDriveNumber}&i=${
+                    data?.fiscalDocumentNumber
+                }&fp=${data?.fiscalSign}&n=${data?.operationType}`
+            )
+        );
+        closeModal();
+    }, 250);
 
     const startCamera = async () => {
         const camers = Html5Qrcode.getCameras();
@@ -26,9 +75,7 @@ export const initScan = async () => {
                 fps: 10,
                 qrbos: 250,
             },
-            (decodedText, decodedResult) => {
-                console.log(decodedText, decodedResult);
-            },
+            scanSuccess,
             (errorMessage) => {}
         );
     };
@@ -51,42 +98,6 @@ export const initScan = async () => {
     modalScan.onclick = (e) => {
         if (e.target !== modalScan) return;
 
-        closeModal();
-    };
-
-    const replaceDecodedParams = (stringParams) => stringParams;
-    // ?.replace("t=", "filterEQ[dateTime]=")
-    // ?.replace("s=", "filterEQ[totalSum]=")
-    // ?.replace("fn=", "filterEQ[fiscalDriveNumber]=")
-    // ?.replace("i=", "filterEQ[fiscalDocumentNumber]=")
-    // ?.replace("fp=", "filterEQ[fiscalSign]=")
-    // ?.replace("n=", "filterEQ[operationType]=")
-    const scanSuccess = async (decode) => {
-        const decodedData = getParamsFromQuery(
-            replaceDecodedParams(decode?.decodedText)
-        );
-
-        const res = await axios.get(`${API_URL}/receipt`, {
-            params: {
-                extends:
-                    "products,operationTypeCollection,taxationTypeCollection",
-                limit: 1,
-                ...decodedData,
-                // "filterEQ[dateTime]": moment(
-                //     decodedData["filterEQ[dateTime]"]
-                // ).toISOString(),
-            },
-        });
-
-        // finded receipt
-        const data = res.data?.data?.data?.[0];
-
-        if (!data) {
-            closeModal();
-            return;
-        }
-
-        receipt.innerHTML = receiptComponent(data);
         closeModal();
     };
 

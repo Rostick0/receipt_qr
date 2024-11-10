@@ -158,4 +158,6 @@
             </div>
         </div>
     </div>
+
+    <canvas id="canvas"></canvas>
 @endsection
