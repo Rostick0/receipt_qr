@@ -4,6 +4,33 @@ import moment from "moment";
 import { receiptComponent, receiptQrCode } from "./components";
 import debounce from "lodash/debounce";
 
+export const updateReceipt = async (dataSeach) => {
+    const receipt = document.querySelector("#receipt");
+
+    const res = await axios.get(`${API_URL}/receipt`, {
+        params: {
+            extends: "products,operationTypeCollection,taxationTypeCollection",
+            limit: 1,
+            ...dataSeach,
+        },
+    });
+
+    // finded receipt
+    const data = res.data?.data?.data?.[0];
+
+    if (!data) {
+        alert("Код не найден");
+        // closeModal();
+        return;
+    }
+
+    receipt.innerHTML = receiptComponent(data);
+
+    receipt.scrollIntoView({
+        behavior: "smooth",
+    });
+};
+
 export const getParamsFromQuery = (queryString) =>
     Object.fromEntries(new URLSearchParams(queryString).entries());
 
@@ -29,42 +56,42 @@ export const initScan = async () => {
             replaceDecodedParams(decode?.decodedText)
         );
 
-        const res = await axios.get(`${API_URL}/receipt`, {
-            params: {
-                extends:
-                    "products,operationTypeCollection,taxationTypeCollection",
-                limit: 1,
-                ...decodedData,
-                "filterEQ[dateTime]": moment(
-                    decodedData["filterEQ[dateTime]"]
-                ).toISOString(),
-            },
+        await updateReceipt({
+            ...decodedData,
+            "filterEQ[totalSum]": decodedData["filterEQ[totalSum]"] * 100,
+            "filterEQ[dateTime]": moment(
+                decodedData["filterEQ[dateTime]"]
+            ).format("YYYY-MM-DD HH:mm:ss"),
         });
 
-        // finded receipt
-        const data = res.data?.data?.data?.[0];
+        // const res = await axios.get(`${API_URL}/receipt`, {
+        //     params: {
+        //         extends:
+        //             "products,operationTypeCollection,taxationTypeCollection",
+        //         limit: 1,
+        //         ...decodedData,
+        //         "filterEQ[dateTime]": moment(
+        //             decodedData["filterEQ[dateTime]"]
+        //         ).toISOString(),
+        //     },
+        // });
 
-        if (!data) {
-            alert("Код не найден");
-            // closeModal();
-            return;
-        }
+        // // finded receipt
+        // const data = res.data?.data?.data?.[0];
 
-        receipt.innerHTML = receiptComponent(data);
-        console.log(
-            receiptQrCode(
-                `dateTime=${moment(data?.dateTime).format("YYYYMMDDTHHmm")}&s=${
-                    data?.totalSum / 100
-                }&fn=${data?.fiscalDriveNumber}&i=${
-                    data?.fiscalDocumentNumber
-                }&fp=${data?.fiscalSign}&n=${data?.operationType}`
-            )
-        );
+        // if (!data) {
+        //     alert("Код не найден");
+        //     // closeModal();
+        //     return;
+        // }
+
+        // receipt.innerHTML = receiptComponent(data);
+
         closeModal();
 
-        receipt.scrollIntoView({
-            behavior: "smooth",
-        });
+        // receipt.scrollIntoView({
+        //     behavior: "smooth",
+        // });
     }, 250);
 
     const startCamera = async () => {

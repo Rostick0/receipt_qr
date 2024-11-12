@@ -91,7 +91,7 @@
                             <div class="search__switch_item active">Ручной ввод</div>
                             <div class="search__switch_item" id="qr-scan">Сканирование QR-кода</div>
                         </div>
-                        <form class="page-index__form flex flex-col gap-y-6" action="">
+                        <form class="page-index__form flex flex-col gap-y-6" id="receipt-search" method="POST">
                             <x-field label="ФН" name="fiscalDriveNumber" placeholder="1948502912138934205" />
                             <x-field label="ФД" name="fiscalDocumentNumber" placeholder="1948502912138934205" />
                             <x-field label="ФПД" name="fiscalSign" placeholder="1948502912138934205" />
