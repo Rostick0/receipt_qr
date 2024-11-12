@@ -1,7 +1,8 @@
 import axios from "axios";
 import "./bootstrap";
 // import "./scan";
-import { initScan } from "./scan";
+import { initScan, updateReceipt } from "./scan";
+import { getFormValues } from "./utils";
 
 try {
     initScan();
@@ -10,13 +11,16 @@ try {
 }
 
 (async () => {
-    const onSearchReceipt = (e) => {
+    const onSearchReceipt = async (e) => {
         e.preventDefault();
 
         const form = new FormData(e.target);
-        console.log(form);
-        // form.forEach((item) => console.log(item));
-        // console.log(e);
+        const formValues = getFormValues(form);
+
+        await updateReceipt({
+            ...formValues,
+            "filterEQ[totalSum]": formValues["filterEQ[totalSum]"] * 100,
+        });
     };
 
     const receiptSearch = document.querySelector("#receipt-search");

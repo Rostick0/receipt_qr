@@ -15,7 +15,6 @@ class Field extends Component
         public ?string $label = null,
         public string $name,
         public ?string $type = 'text',
-        public ?string $placeholder = ''
     ) {
         // $this->type = $type;
     }

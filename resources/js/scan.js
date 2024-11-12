@@ -20,7 +20,6 @@ export const updateReceipt = async (dataSeach) => {
 
     if (!data) {
         alert("Код не найден");
-        // closeModal();
         return;
     }
 

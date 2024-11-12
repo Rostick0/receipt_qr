@@ -92,19 +92,23 @@
                             <div class="search__switch_item" id="qr-scan">Сканирование QR-кода</div>
                         </div>
                         <form class="page-index__form flex flex-col gap-y-6" id="receipt-search" method="POST">
-                            <x-field label="ФН" name="fiscalDriveNumber" placeholder="1948502912138934205" />
-                            <x-field label="ФД" name="fiscalDocumentNumber" placeholder="1948502912138934205" />
-                            <x-field label="ФПД" name="fiscalSign" placeholder="1948502912138934205" />
-                            <x-field label="Дата" type="datetime-local" name="dateTime"
-                                placeholder="1948502912138934205" />
+                            <x-field label="ФН" name="filterEQ[fiscalDriveNumber]" placeholder="1948502912138934205"
+                                type="number" required min="0" />
+                            <x-field label="ФД" name="filterEQ[fiscalDocumentNumber]" placeholder="1948502912138934205"
+                                type="number" required min="0" />
+                            <x-field label="ФПД" name="filterEQ[fiscalSign]" placeholder="1948502912138934205"
+                                type="number" required min="0" />
+                            <x-field label="Дата" type="datetime-local" name="filterEQ[dateTime]" required
+                                max="{{ \Carbon\Carbon::now() }}" />
 
                             {{-- <div class="grid grid-cols-2 gap-x-2.5 items-end">
                             <x-field type="date" placeholder="1948502912138934205" />
                             <x-field type="time" placeholder="1948502912138934205" />
                                 </div> --}}
-                            <x-field label="Сумма" name="1" placeholder="000 000 000 ₽" />
+                            <x-field label="Сумма" name="filterEQ[totalSum]" placeholder="000 000 000 ₽" type="number"
+                                required min="0" />
                             <div class="flex gap-x-6">
-                                <x-select label="Тип" name="operationType" :options="$options_operation_type" />
+                                <x-select label="Тип" name="filterEQ[operationType]" :options="$options_operation_type" required />
                                 <button class="btn grow">Найти</button>
                             </div>
                         </form>

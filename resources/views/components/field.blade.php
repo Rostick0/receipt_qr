@@ -3,5 +3,5 @@
         <span>{{ $label }}</span>
     @endif
     <input class="input border-b border-solid border-black grow pb-2.5" type="{{ $type }}"
-        placeholder="{{ $placeholder }}" name="{{ $name }}">
+        name="{{ $name }}" {{ $attributes }}>
 </label>
