@@ -39,7 +39,6 @@ export const initScan = async () => {
 
     const qrScan = document.querySelector("#qr-scan");
     const modalScan = document.querySelector("#modal-scan");
-    const receipt = document.querySelector("#receipt");
 
     const replaceDecodedParams = (stringParams) =>
         stringParams

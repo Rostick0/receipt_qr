@@ -19,6 +19,12 @@
     }
 }
 
+#receipt {
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+}
+
 .modal {
     @apply p-12;
     background-color: rgba(0, 0, 0, 0.5);

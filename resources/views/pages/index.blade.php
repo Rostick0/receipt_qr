@@ -5,7 +5,7 @@
         <div class="container mx-auto">
             <div class="page-index__container flex items-start gap-12">
                 <div class="grow" id="receipt">
-                    <div class="receipt text-xl py-6 px-12">
+                    <div class="receipt grow text-xl py-6 px-12">
                         <div class="">
                             <div class="text-center mb-1">КАССОВЫЙ ЧЕК</div>
                             <div class="text-center mb-1">ООО Конфеты</div>
