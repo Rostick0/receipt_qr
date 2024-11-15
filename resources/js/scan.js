@@ -51,9 +51,8 @@ export const initScan = async () => {
             ?.replace("n=", "filterEQ[operationType]=");
 
     const scanSuccess = debounce(async (decode) => {
-        const decodedData = getParamsFromQuery(
-            replaceDecodedParams(decode?.decodedText)
-        );
+        console.log(decode);
+        const decodedData = getParamsFromQuery(replaceDecodedParams(decode));
 
         await updateReceipt({
             ...decodedData,
@@ -144,7 +143,7 @@ export const initScan = async () => {
 
         htmlscanner
             .scanFileV2(imageFile, false)
-            .then(scanSuccess)
+            .then((scanRes) => scanSuccess(scanRes?.decodedText))
             .catch((err) => {
                 // failure, handle it.
                 console.log(`Error scanning file. Reason: ${err}`);
