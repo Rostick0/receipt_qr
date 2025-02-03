@@ -19,7 +19,7 @@ try {
 
         await updateReceipt({
             ...formValues,
-            "filterEQ[totalSum]": formValues["filterEQ[totalSum]"] * 100,
+            // "filterEQ[totalSum]": formValues["filterEQ[totalSum]"] * 100,
         });
     };
 

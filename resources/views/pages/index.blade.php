@@ -92,23 +92,23 @@
                             <div class="search__switch_item" id="qr-scan">Сканирование QR-кода</div>
                         </div>
                         <form class="page-index__form flex flex-col gap-y-6" id="receipt-search" method="POST">
-                            <x-field label="ФН" name="filterEQ[fiscalDriveNumber]" placeholder="1948502912138934205"
-                                type="number" required min="0" />
-                            <x-field label="ФД" name="filterEQ[fiscalDocumentNumber]" placeholder="1948502912138934205"
-                                type="number" required min="0" />
-                            <x-field label="ФПД" name="filterEQ[fiscalSign]" placeholder="1948502912138934205"
-                                type="number" required min="0" />
-                            <x-field label="Дата" type="datetime-local" name="filterEQ[dateTime]" required
+                            <x-field label="ФН" name="Fn" placeholder="1948502912138934205" type="number" required
+                                min="0" />
+                            <x-field label="ФД" name="FiscalDocumentId" placeholder="1948502912138934205" type="number"
+                                required min="0" />
+                            <x-field label="ФПД" name="FiscalSign" placeholder="1948502912138934205" type="number"
+                                required min="0" />
+                            <x-field label="Дата" type="datetime-local" name="Date" required
                                 max="{{ \Carbon\Carbon::now() }}" />
 
                             {{-- <div class="grid grid-cols-2 gap-x-2.5 items-end">
                             <x-field type="date" placeholder="1948502912138934205" />
                             <x-field type="time" placeholder="1948502912138934205" />
                                 </div> --}}
-                            <x-field label="Сумма" name="filterEQ[totalSum]" placeholder="000 000 000 ₽" type="number"
-                                required min="0" />
+                            <x-field label="Сумма" name="Sum" placeholder="000 000 000 ₽" type="number" required
+                                min="0.00" step="0.01" />
                             <div class="flex gap-x-6">
-                                <x-select label="Тип" name="filterEQ[operationType]" :options="$options_operation_type" required />
+                                <x-select label="Тип" name="TypeOperation" :options="$options_operation_type" required />
                                 <button class="btn grow">Найти</button>
                             </div>
                         </form>

@@ -7,13 +7,8 @@ import debounce from "lodash/debounce";
 export const updateReceipt = async (dataSeach) => {
     const receipt = document.querySelector("#receipt");
 
-    const res = await axios.get(`${API_URL}/receipt`, {
-        params: {
-            extends: "products,operationTypeCollection,taxationTypeCollection",
-            limit: 1,
-            ...dataSeach,
-        },
-    });
+    const API_RECEIPT = "http://5.35.84.146:8050/ticket/send";
+    const res = await axios.post(API_RECEIPT, dataSeach);
 
     // finded receipt
     const data = res.data?.data?.data?.[0];
@@ -40,26 +35,39 @@ export const initScan = async () => {
     const qrScan = document.querySelector("#qr-scan");
     const modalScan = document.querySelector("#modal-scan");
 
-    const replaceDecodedParams = (stringParams) =>
-        stringParams
-            ?.replace("t=", "filterEQ[dateTime]=")
-            ?.replace("s=", "filterEQ[totalSum]=")
-            ?.replace("fn=", "filterEQ[fiscalDriveNumber]=")
-            ?.replace("i=", "filterEQ[fiscalDocumentNumber]=")
-            ?.replace("fp=", "filterEQ[fiscalSign]=")
-            ?.replace("n=", "filterEQ[operationType]=");
+    const replaceDecodedParams = (stringParams) => stringParams;
+    // ?.replace("t=", "filterEQ[dateTime]=")
+    // ?.replace("s=", "filterEQ[totalSum]=")
+    // ?.replace("fn=", "filterEQ[fiscalDriveNumber]=")
+    // ?.replace("i=", "filterEQ[fiscalDocumentNumber]=")
+    // ?.replace("fp=", "filterEQ[fiscalSign]=")
+    // ?.replace("n=", "filterEQ[operationType]=");
+    // ?.replace("t=", "Date=")
+    // ?.replace("s=", "Sum=")
+    // ?.replace("n=", "TypeOperation=")
+    // ?.replace("fn=", "Fn=")
+    // ?.replace("i=", "FiscalDocumentId=")
+    // ?.replace("fp=", "FiscalSign=");
 
     const scanSuccess = debounce(async (decode) => {
-        console.log(decode);
-        const decodedData = getParamsFromQuery(replaceDecodedParams(decode));
+        const query = {
+            Date: "",
+            Sum: "",
+            Fn: "",
+            FiscalDocumentId: "",
+            FiscalSign: "",
+            TypeOperation: "",
+        };
+        const decodedData = getParamsFromQuery(decode);
 
-        await updateReceipt({
-            ...decodedData,
-            "filterEQ[totalSum]": decodedData["filterEQ[totalSum]"] * 100,
-            "filterEQ[dateTime]": moment(
-                decodedData["filterEQ[dateTime]"]
-            ).format("YYYY-MM-DD HH:mm:ss"),
-        });
+        query.Date = decodedData?.t;
+        query.Sum = decodedData?.s;
+        query.Fn = decodedData?.fn;
+        query.FiscalDocumentId = decodedData?.i;
+        query.FiscalSign = decodedData?.fp;
+        query.TypeOperation = decodedData?.n;
+
+        await updateReceipt(query);
 
         // const res = await axios.get(`${API_URL}/receipt`, {
         //     params: {
