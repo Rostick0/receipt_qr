@@ -3,6 +3,7 @@ import "./bootstrap";
 // import "./scan";
 import { initScan, updateReceipt } from "./scan";
 import { getFormValues } from "./utils";
+import moment from "moment";
 
 try {
     initScan();
@@ -19,7 +20,7 @@ try {
 
         await updateReceipt({
             ...formValues,
-            // "filterEQ[totalSum]": formValues["filterEQ[totalSum]"] * 100,
+            Date: moment(formValues?.Date).format("YMMDDTHHmmss"),
         });
     };
 

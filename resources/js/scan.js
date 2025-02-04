@@ -8,10 +8,16 @@ export const updateReceipt = async (dataSeach) => {
     const receipt = document.querySelector("#receipt");
 
     const API_RECEIPT = "http://5.35.84.146:8050/ticket/send";
-    const res = await axios.post(API_RECEIPT, dataSeach);
+    const res = await axios.post(
+        API_RECEIPT,
+        new URLSearchParams(dataSeach).toString()
+        // {
+        // headers: { "content-type": "raw" },
+        // }
+    );
 
     // finded receipt
-    const data = res.data?.data?.data?.[0];
+    const data = res.data?.ticket;
 
     if (!data) {
         alert("Код не найден");
@@ -35,20 +41,6 @@ export const initScan = async () => {
     const qrScan = document.querySelector("#qr-scan");
     const modalScan = document.querySelector("#modal-scan");
 
-    const replaceDecodedParams = (stringParams) => stringParams;
-    // ?.replace("t=", "filterEQ[dateTime]=")
-    // ?.replace("s=", "filterEQ[totalSum]=")
-    // ?.replace("fn=", "filterEQ[fiscalDriveNumber]=")
-    // ?.replace("i=", "filterEQ[fiscalDocumentNumber]=")
-    // ?.replace("fp=", "filterEQ[fiscalSign]=")
-    // ?.replace("n=", "filterEQ[operationType]=");
-    // ?.replace("t=", "Date=")
-    // ?.replace("s=", "Sum=")
-    // ?.replace("n=", "TypeOperation=")
-    // ?.replace("fn=", "Fn=")
-    // ?.replace("i=", "FiscalDocumentId=")
-    // ?.replace("fp=", "FiscalSign=");
-
     const scanSuccess = debounce(async (decode) => {
         const query = {
             Date: "",
@@ -60,7 +52,7 @@ export const initScan = async () => {
         };
         const decodedData = getParamsFromQuery(decode);
 
-        query.Date = decodedData?.t;
+        query.Date = moment(decodedData?.t).format("YMMDDTHHmmss");
         query.Sum = decodedData?.s;
         query.Fn = decodedData?.fn;
         query.FiscalDocumentId = decodedData?.i;
