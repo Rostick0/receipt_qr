@@ -7,7 +7,9 @@ import debounce from "lodash/debounce";
 export const updateReceipt = async (dataSeach) => {
     const receipt = document.querySelector("#receipt");
 
-    const API_RECEIPT = "http://5.35.84.146:8050/ticket/send";
+    // const API_RECEIPT = "http://5.35.84.146:8050/ticket/send";
+    const API_RECEIPT = "https://proverka-cheka.ru//ticket/send";
+    
     const res = await axios.post(
         API_RECEIPT,
         new URLSearchParams(dataSeach).toString()
