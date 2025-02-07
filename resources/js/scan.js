@@ -33,14 +33,16 @@ export const updateReceipt = async (dataSeach) => {
         behavior: "smooth",
     });
 
-    receiptQrCode(new URLSearchParams({
-        t: moment(data?.content?.dateTime).format("YMMDDTHHmmss"),
-        s: (data?.content?.totalSum / 100)?.toFixed(2),
-        fn: data?.content?.fiscalDriveNumber,
-        i: data?.content?.fiscalDocumentNumber,
-        fp: data?.content?.fiscalSign,
-        n: data?.content?.operationType,
-    }).toString());
+    receiptQrCode(
+        new URLSearchParams({
+            t: moment(data?.content?.dateTime).format("YMMDDTHHmmss"),
+            s: (data?.content?.totalSum / 100)?.toFixed(2),
+            fn: data?.content?.fiscalDriveNumber,
+            i: data?.content?.fiscalDocumentNumber,
+            fp: data?.content?.fiscalSign,
+            n: data?.content?.operationType,
+        }).toString()
+    );
 };
 
 export const getParamsFromQuery = (queryString) =>
@@ -73,34 +75,7 @@ export const initScan = async () => {
 
         await updateReceipt(query);
 
-        // const res = await axios.get(`${API_URL}/receipt`, {
-        //     params: {
-        //         extends:
-        //             "products,operationTypeCollection,taxationTypeCollection",
-        //         limit: 1,
-        //         ...decodedData,
-        //         "filterEQ[dateTime]": moment(
-        //             decodedData["filterEQ[dateTime]"]
-        //         ).toISOString(),
-        //     },
-        // });
-
-        // // finded receipt
-        // const data = res.data?.data?.data?.[0];
-
-        // if (!data) {
-        //     alert("Код не найден");
-        //     // closeModal();
-        //     return;
-        // }
-
-        // receipt.innerHTML = receiptComponent(data);
-
         closeModal();
-
-        // receipt.scrollIntoView({
-        //     behavior: "smooth",
-        // });
     }, 250);
 
     const startCamera = async () => {
