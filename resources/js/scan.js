@@ -17,8 +17,7 @@ export const updateReceipt = async (dataSeach) => {
     );
 
     // finded receipt
-    const data =
-        res.data?.fiscalDocContent && JSON.parse(res.data?.fiscalDocContent);
+    const data = res.data?.fiscalDocument;
 
     if (!data) {
         alert("Код не найден");
