@@ -25,8 +25,6 @@ export const updateReceipt = async (dataSeach) => {
         return;
     }
 
-    console.log(data);
-
     receipt.innerHTML = receiptComponent(data);
 
     receipt.scrollIntoView({
@@ -132,7 +130,7 @@ export const initScan = async () => {
             .then((scanRes) => scanSuccess(scanRes?.decodedText))
             .catch((err) => {
                 // failure, handle it.
-                console.log(`Error scanning file. Reason: ${err}`);
+                alert(`Ошибка сканирования: ${err}`);
             });
     });
 

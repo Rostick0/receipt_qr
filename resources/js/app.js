@@ -28,11 +28,3 @@ try {
 
     receiptSearch.onsubmit = onSearchReceipt;
 })();
-
-// const res = axios.get(`${API_URL}/receipt`, {
-//     params: {
-//         extends: "products,operationTypeCollection,taxationTypeCollection",
-//         limit: 1,
-//     },
-// });
-// console.log(await res.then((res) => res.data?.data?.data[0]));

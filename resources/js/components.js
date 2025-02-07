@@ -22,7 +22,7 @@ export const receiptQrCode = (qrCodeData) =>
         },
         function (error) {
             if (error) console.error(error);
-            console.log("success!");
+            // console.log("success!");
         }
     );
 
