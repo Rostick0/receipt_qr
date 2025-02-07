@@ -32,10 +32,10 @@
                                 <span>СНО</span>
                                 <span>УСН</span>
                             </div>
-                            <div class="flex items-center justify-between mb-2.5">
+                            {{-- <div class="flex items-center justify-between mb-2.5">
                                 <span>Кассир</span>
                                 <span>Иванов И.И.</span>
-                            </div>
+                            </div> --}}
                             <div class="flex items-center justify-between mb-2.5">
                                 <span>СРН ККТНО</span>
                                 <span>0012305430213444</span>

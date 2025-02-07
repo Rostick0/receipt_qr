@@ -17,18 +17,30 @@ export const updateReceipt = async (dataSeach) => {
     );
 
     // finded receipt
-    const data = res.data?.ticket;
+    const data =
+        res.data?.fiscalDocContent && JSON.parse(res.data?.fiscalDocContent);
 
     if (!data) {
         alert("Код не найден");
         return;
     }
 
+    console.log(data);
+
     receipt.innerHTML = receiptComponent(data);
 
     receipt.scrollIntoView({
         behavior: "smooth",
     });
+
+    receiptQrCode(new URLSearchParams({
+        t: moment(data?.content?.dateTime).format("YMMDDTHHmmss"),
+        s: (data?.content?.totalSum / 100)?.toFixed(2),
+        fn: data?.content?.fiscalDriveNumber,
+        i: data?.content?.fiscalDocumentNumber,
+        fp: data?.content?.fiscalSign,
+        n: data?.content?.operationType,
+    }).toString());
 };
 
 export const getParamsFromQuery = (queryString) =>
