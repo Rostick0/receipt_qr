@@ -21,7 +21,7 @@ services:
         volumes:
             - '.:/var/www/html'
             - '/etc/letsencrypt/:/etc/letsencrypt/'
-            - '/etc/nginx/sites-available/proverka-cheka:/etc/nginx/conf.d/default.conf'
+            # - '/etc/nginx/sites-available/proverka-cheka:/etc/nginx/conf.d/default.conf'
             # - '/etc/letsencrypt/live/proverka-cheka/:/etc/letsencrypt/live/proverka-cheka/'
         networks:
             - sail
