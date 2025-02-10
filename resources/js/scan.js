@@ -9,7 +9,7 @@ export const updateReceipt = async (dataSeach) => {
 
     // const API_RECEIPT = "http://5.35.84.146:8050/ticket/send";
     const API_RECEIPT = "https://proverka-cheka.ru//ticket/send";
-    
+
     const res = await axios.post(
         API_RECEIPT,
         new URLSearchParams(dataSeach).toString()
@@ -81,7 +81,7 @@ export const initScan = async () => {
         const camers = Html5Qrcode.getCameras();
         const devices = await camers;
 
-        const cameraId = devices[0]?.id;
+        const cameraId = devices?.[1]?.id ?? devices?.[0]?.id;
 
         htmlscanner.start(
             cameraId,
@@ -131,7 +131,7 @@ export const initScan = async () => {
             .then((scanRes) => scanSuccess(scanRes?.decodedText))
             .catch((err) => {
                 // failure, handle it.
-                alert(`Ошибка сканирования: ${err}`);
+                alert(`Ошибка сканирования: чек не найден`);
             });
     });
 
