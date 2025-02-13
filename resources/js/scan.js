@@ -22,7 +22,7 @@ export const updateReceipt = async (dataSeach) => {
     const data = res.data?.fiscalDocument;
 
     if (!data) {
-        alert("Код не найден");
+        alert("Чек не найден");
         return;
     }
 
@@ -78,13 +78,10 @@ export const initScan = async () => {
     }, 250);
 
     const startCamera = async () => {
-        const camers = Html5Qrcode.getCameras();
-        const devices = await camers;
-
-        const cameraId = devices?.[1]?.id ?? devices?.[0]?.id;
+        // const camers = Html5Qrcode.getCameras();
 
         htmlscanner.start(
-            cameraId,
+            { facingMode: "environment" },
             {
                 fps: 10,
                 qrbos: 250,
