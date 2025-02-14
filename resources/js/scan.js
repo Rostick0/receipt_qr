@@ -51,6 +51,7 @@ export const getParamsFromQuery = (queryString) =>
 export const initScan = async () => {
     const { Html5Qrcode } = await import("html5-qrcode");
     let isScanState = false;
+    let isAlerted = false;
     // t=20241101T1016&s=117.43&fn=7281440701438429&i=126871&fp=4180788980&n=1
 
     const qrScan = document.querySelector("#qr-scan");
@@ -91,7 +92,10 @@ export const initScan = async () => {
                 (errorMessage) => {}
             );
         } catch {
-            alert("Камера недоступна");
+            if (!isAlerted) {
+                isAlerted = true;
+                alert("Камера недоступна");
+            }
         }
     };
 
