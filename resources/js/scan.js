@@ -140,7 +140,7 @@ export const initScan = async () => {
     btn.onclick = async () => {
         isScanState = !isScanState;
 
-        if (!isScanState) {
+        if (isScanState) {
             if (htmlscanner.isScanning) htmlscanner.stop();
             fileinput.removeAttribute("hidden");
             btn.textContent = "Сканировать";
