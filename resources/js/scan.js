@@ -22,10 +22,11 @@ export const updateReceipt = async (dataSeach) => {
     const data = res.data?.fiscalDocument;
 
     if (!data) {
-        alert("Чек не найден");
+        alert("Чек некорректный");
         return;
     }
 
+    alert("Чек корректный");
     receipt.innerHTML = receiptComponent(data);
 
     receipt.scrollIntoView({
@@ -49,6 +50,7 @@ export const getParamsFromQuery = (queryString) =>
 
 export const initScan = async () => {
     const { Html5Qrcode } = await import("html5-qrcode");
+    let isScanState = false;
     // t=20241101T1016&s=117.43&fn=7281440701438429&i=126871&fp=4180788980&n=1
 
     const qrScan = document.querySelector("#qr-scan");
@@ -78,21 +80,23 @@ export const initScan = async () => {
     }, 250);
 
     const startCamera = async () => {
-        // const camers = Html5Qrcode.getCameras();
-
-        htmlscanner.start(
-            { facingMode: "environment" },
-            {
-                fps: 10,
-                qrbos: 250,
-            },
-            scanSuccess,
-            (errorMessage) => {}
-        );
+        try {
+            await htmlscanner.start(
+                { facingMode: "environment" },
+                {
+                    fps: 10,
+                    qrbos: 250,
+                },
+                scanSuccess,
+                (errorMessage) => {}
+            );
+        } catch {
+            alert("Камера недоступна");
+        }
     };
 
-    qrScan.onclick = () => {
-        startCamera();
+    qrScan.onclick = async () => {
+        await startCamera();
         modalScan.classList.add("active");
     };
 
@@ -133,15 +137,17 @@ export const initScan = async () => {
     });
 
     const btn = document.querySelector("#qr-btn");
-    btn.onclick = () => {
-        if (htmlscanner.isScanning) {
-            htmlscanner.stop();
+    btn.onclick = async () => {
+        isScanState = !isScanState;
+
+        if (!isScanState) {
+            if (htmlscanner.isScanning) htmlscanner.stop();
             fileinput.removeAttribute("hidden");
             btn.textContent = "Сканировать";
             return;
         }
 
-        startCamera();
+        await startCamera();
         fileinput.setAttribute("hidden", true);
         btn.textContent = "Загрузить файл";
     };

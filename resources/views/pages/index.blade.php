@@ -109,7 +109,7 @@
                                 min="0.00" step="0.01" />
                             <div class="flex gap-x-6">
                                 <x-select label="Тип" name="TypeOperation" :options="$options_operation_type" required />
-                                <button class="btn grow">Найти</button>
+                                <button class="btn grow">Проверить</button>
                             </div>
                         </form>
                     </div>
